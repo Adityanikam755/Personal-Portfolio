@@ -1,0 +1,2137 @@
+Page: Aditya Nikam - Personal Portfolio
+
+```html
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aditya Nikam | Software Engineer | AWS & DevOps Engineer | Conversational AI Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,500,600,700&f[]=satoshi@400,500,700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --glow-cyan: rgba(34, 211, 238, 0.4);
+            --glow-purple: rgba(168, 85, 247, 0.4);
+            --glass-bg: rgba(15, 23, 42, 0.8);
+            --glass-border: rgba(255, 255, 255, 0.08);
+        }
+
+        body {
+            font-family: 'Satoshi', sans-serif;
+            background-color: #020617;
+            color: #f8fafc;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Clash Grotesk', sans-serif;
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #22d3ee 0%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background: linear-gradient(90deg, #22d3ee, #a855f7);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .glow-hover:hover {
+            box-shadow: 0 0 25px var(--glow-cyan);
+            border-color: rgba(34, 211, 238, 0.3);
+        }
+
+        .animated-bg {
+            background: radial-gradient(circle at 50% 50%, #0f172a 0%, #020617 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #22d3ee;
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0);
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 0.6;
+            }
+
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .typing-effect {
+            border-right: 2px solid #22d3ee;
+            white-space: nowrap;
+            overflow: hidden;
+            animation: typing 3.5s steps(70, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from {
+                width: 0
+            }
+
+            to {
+                width: 100%
+            }
+        }
+
+        @keyframes blink-caret {
+
+            from,
+            to {
+                border-color: transparent
+            }
+
+            50% {
+                border-color: #22d3ee
+            }
+        }
+
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, #22d3ee, #a855f7, transparent);
+            transform: translateX(-50%);
+        }
+
+        .skill-chip {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .skill-chip:hover {
+            transform: translateY(-5px) scale(1.05);
+            background: rgba(34, 211, 238, 0.1);
+            border-color: #22d3ee;
+        }
+
+        .project-card:hover .project-overlay {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Project Detail Modal */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(2, 6, 23, 0.85);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1 !important;
+            visibility: visible !important;
+            pointer-events: auto !important;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 20, 60, 0.95));
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 1.5rem;
+            max-width: 720px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(244, 63, 94, 0.1);
+            transform: translateY(30px) scale(0.95);
+            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0) scale(1);
+        }
+
+        .modal-content::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .modal-content::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb {
+            background: rgba(244, 63, 94, 0.3);
+            border-radius: 3px;
+        }
+
+        .modal-feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.5rem 0;
+        }
+
+        .modal-tech-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.35rem 0.85rem;
+            background: rgba(244, 63, 94, 0.08);
+            border: 1px solid rgba(244, 63, 94, 0.2);
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #fb7185;
+            transition: all 0.2s ease;
+        }
+
+        .modal-tech-chip:hover {
+            background: rgba(244, 63, 94, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .detail-btn {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .detail-btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(244, 63, 94, 0.2), rgba(168, 85, 247, 0.2));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .detail-btn:hover::after {
+            opacity: 1;
+        }
+
+        /* Resume Button Custom Glow and Shimmer Effect */
+        .resume-btn {
+            position: relative;
+            border: 1px solid transparent;
+            background: linear-gradient(#020617, #020617) padding-box,
+                linear-gradient(135deg, #22d3ee, #a855f7) border-box;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+        }
+
+        .resume-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 25px rgba(34, 211, 238, 0.35), 0 0 50px rgba(168, 85, 247, 0.25);
+            background: linear-gradient(#0f172a, #0f172a) padding-box,
+                linear-gradient(135deg, #a855f7, #22d3ee) border-box;
+        }
+
+        .resume-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg,
+                    transparent,
+                    rgba(34, 211, 238, 0.3),
+                    rgba(168, 85, 247, 0.3),
+                    transparent);
+            transform: skewX(-25deg);
+            transition: all 0.75s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .resume-btn:hover::before {
+            left: 150%;
+        }
+
+        /* LinkedIn Button Custom Glow and Shimmer Effect */
+        .linkedin-btn {
+            position: relative;
+            border: 1px solid transparent;
+            background: linear-gradient(#020617, #020617) padding-box,
+                linear-gradient(135deg, #0077b5, #22d3ee) border-box;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+        }
+
+        .linkedin-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 25px rgba(0, 119, 181, 0.35), 0 0 50px rgba(34, 211, 238, 0.25);
+            background: linear-gradient(#0f172a, #0f172a) padding-box,
+                linear-gradient(135deg, #22d3ee, #0077b5) border-box;
+        }
+
+        .linkedin-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg,
+                    transparent,
+                    rgba(0, 119, 181, 0.3),
+                    rgba(34, 211, 238, 0.3),
+                    transparent);
+            transform: skewX(-25deg);
+            transition: all 0.75s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .linkedin-btn:hover::before {
+            left: 150%;
+        }
+
+        /* GitHub Button Custom Glow and Shimmer Effect */
+        .github-btn {
+            position: relative;
+            border: 1px solid transparent;
+            background: linear-gradient(#020617, #020617) padding-box,
+                linear-gradient(135deg, #f8fafc, #a855f7) border-box;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+        }
+
+        .github-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 25px rgba(248, 250, 252, 0.25), 0 0 50px rgba(168, 85, 247, 0.25);
+            background: linear-gradient(#0f172a, #0f172a) padding-box,
+                linear-gradient(135deg, #a855f7, #f8fafc) border-box;
+        }
+
+        .github-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg,
+                    transparent,
+                    rgba(248, 250, 252, 0.15),
+                    rgba(168, 85, 247, 0.3),
+                    transparent);
+            transform: skewX(-25deg);
+            transition: all 0.75s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .github-btn:hover::before {
+            left: 150%;
+        }
+
+        /* Floating Bottom Dock styling */
+        .dock-btn {
+            position: relative;
+            color: #94a3b8;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .dock-btn:hover {
+            color: #22d3ee;
+            background: rgba(34, 211, 238, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .active-dock-btn {
+            color: #ffffff !important;
+            background: linear-gradient(135deg, rgba(34, 211, 238, 0.15), rgba(168, 85, 247, 0.15)) !important;
+            border: 1px solid rgba(34, 211, 238, 0.3) !important;
+            box-shadow: 0 0 15px rgba(34, 211, 238, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Subtle Background Portrait Image */
+        .bg-portrait {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            opacity: 0.15;
+            pointer-events: none;
+            overflow: hidden;
+            mask-image: radial-gradient(circle at center, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0) 80%);
+            -webkit-mask-image: radial-gradient(circle at center, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0) 80%);
+        }
+
+        .bg-portrait img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            filter: grayscale(100%) contrast(1.1) brightness(0.6);
+        }
+
+        /* Preloader exit animations */
+        .loader-fade-out {
+            opacity: 0 !important;
+            pointer-events: none !important;
+            transform: scale(1.05) !important;
+        }
+
+        /* Mobile Menu Drawer */
+        .mobile-menu-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 60;
+            background: rgba(2, 6, 23, 0.6);
+            backdrop-filter: blur(4px);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .mobile-menu-drawer {
+            position: fixed;
+            top: 0;
+            right: 0;
+            z-index: 70;
+            width: 280px;
+            max-width: 80vw;
+            height: 100vh;
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.98), rgba(2, 6, 23, 0.98));
+            border-left: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            transform: translateX(100%);
+            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .mobile-menu-drawer.active {
+            transform: translateX(0);
+        }
+        .mobile-menu-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.875rem 1rem;
+            border-radius: 0.75rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #94a3b8;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+        .mobile-menu-link:hover, .mobile-menu-link:active {
+            color: #22d3ee;
+            background: rgba(34, 211, 238, 0.06);
+            border-color: rgba(34, 211, 238, 0.15);
+        }
+
+        /* ===== MOBILE RESPONSIVE FIXES ===== */
+        @media (max-width: 768px) {
+            /* Fix horizontal overflow globally */
+            html, body {
+                overflow-x: hidden !important;
+            }
+
+            /* Hero: fix typing subtitle overflow */
+            .typing-effect {
+                white-space: normal !important;
+                border-right: none !important;
+                animation: none !important;
+                overflow: visible !important;
+                font-size: 0.95rem !important;
+                line-height: 1.6 !important;
+                text-align: center !important;
+                display: block !important;
+                width: 100% !important;
+            }
+
+            /* Hero subtitle container */
+            .mb-6.h-12 {
+                height: auto !important;
+                min-height: 3rem;
+            }
+
+            /* Hero: reduce title size */
+            #hero h1 {
+                font-size: 2.25rem !important;
+                line-height: 1.2 !important;
+            }
+
+            /* Hero: better button layout - stack vertically */
+            #hero .flex.flex-wrap.justify-center.gap-4 {
+                flex-direction: column !important;
+                align-items: stretch !important;
+                gap: 0.75rem !important;
+                width: 100% !important;
+                max-width: 320px;
+                margin: 0 auto;
+            }
+            #hero .flex.flex-wrap.justify-center.gap-4 > a {
+                justify-content: center !important;
+                padding: 0.875rem 1.5rem !important;
+                font-size: 0.9rem !important;
+                width: 100% !important;
+            }
+
+            /* About: reduce spacing */
+            #about .grid.grid-cols-2.gap-6 {
+                gap: 0.75rem !important;
+            }
+            #about .glass-card.p-6 {
+                padding: 1rem !important;
+            }
+
+            /* Skills: reduce card padding */
+            #skills .glass-card.p-8 {
+                padding: 1.25rem !important;
+            }
+
+            /* Experience: fix timeline for mobile */
+            .timeline-line::before {
+                display: none !important;
+            }
+
+            /* Projects: reduce card height */
+            .project-card .h-80 {
+                height: 14rem !important;
+            }
+
+            /* Modal: reduce padding on mobile */
+            .modal-content {
+                max-height: 90vh !important;
+                border-radius: 1rem !important;
+                margin: 0.5rem !important;
+            }
+            .modal-content .p-8 {
+                padding: 1.25rem !important;
+            }
+            .modal-content .relative.p-8.pb-0 {
+                padding: 1.25rem !important;
+                padding-bottom: 0 !important;
+            }
+            .modal-overlay {
+                padding: 0.75rem !important;
+            }
+
+            /* Modal header: fix layout on small screens */
+            .modal-content .flex.items-start.justify-between .flex.items-center.gap-4 {
+                gap: 0.75rem !important;
+            }
+            .modal-content .flex.items-start.justify-between .flex.items-center.gap-4 h3 {
+                font-size: 1.15rem !important;
+            }
+            .modal-content .flex.items-start.justify-between .flex.items-center.gap-4 .w-14 {
+                width: 2.75rem !important;
+                height: 2.75rem !important;
+                min-width: 2.75rem !important;
+            }
+
+            /* Contact: reduce form card padding */
+            #contact .glass-card.p-8 {
+                padding: 1.25rem !important;
+            }
+
+            /* Footer: bottom padding for safety */
+            footer {
+                padding-bottom: 2rem !important;
+            }
+
+            /* Fix hero description */
+            #hero p.text-lg {
+                font-size: 0.95rem !important;
+            }
+
+            /* Section padding reduction */
+            section.py-24 {
+                padding-top: 4rem !important;
+                padding-bottom: 4rem !important;
+            }
+
+            /* Availability badge */
+            #hero .inline-flex.items-center {
+                font-size: 0.65rem !important;
+            }
+        }
+
+        @media (max-width: 380px) {
+            #hero h1 {
+                font-size: 1.85rem !important;
+            }
+            .typing-effect {
+                font-size: 0.85rem !important;
+            }
+            #hero p.text-lg {
+                font-size: 0.85rem !important;
+            }
+        }
+
+    </style>
+</head>
+
+<body style="overflow: hidden;">
+    <!-- Preloader Screen -->
+    <div id="preloader" class="fixed inset-0 z-[100] bg-slate-950 flex flex-col items-center justify-center transition-all duration-[800ms] ease-out">
+        <div class="relative flex flex-col items-center">
+            <!-- Glowing background blur behind loader -->
+            <div class="absolute w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl -top-16 animate-pulse"></div>
+            
+            <!-- Giant glowing counter -->
+            <div class="text-7xl md:text-8xl font-black tracking-tighter mb-4 text-gradient select-none" id="loader-counter" style="font-family: 'Clash Grotesk', sans-serif;">
+                0
+            </div>
+            
+            <!-- Loading title with terminal blinker -->
+            <div class="text-xs md:text-sm font-bold tracking-[0.2em] text-slate-400 uppercase mb-8 flex items-center gap-1">
+                <span>Initializing System</span>
+                <span class="animate-pulse">...</span>
+            </div>
+            
+            <!-- Sleek progress bar container -->
+            <div class="w-48 h-[3px] bg-white/5 rounded-full overflow-hidden relative">
+                <div id="loader-progress" class="h-full w-0 bg-gradient-to-r from-cyan-400 to-purple-500 transition-all duration-100 ease-out rounded-full shadow-[0_0_10px_rgba(34,211,238,0.5)]"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="min-h-screen animated-bg" style="overflow-x: hidden;">
+        <!-- Floating Particles -->
+        <div class="particle" style="top: 80%; left: 10%;"></div>
+        <div class="particle" style="top: 40%; left: 30%; animation-delay: 2s;"></div>
+        <div class="particle" style="top: 60%; left: 70%; animation-delay: 5s;"></div>
+        <div class="particle" style="top: 20%; left: 90%; animation-delay: 8s;"></div>
+        <div class="particle" style="top: 10%; left: 50%; animation-delay: 3s;"></div>
+
+        <!-- Header / Navigation -->
+        <header class="fixed top-0 left-0 w-full z-50 glass-card bg-opacity-70 border-t-0 border-x-0">
+            <nav class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-end">
+
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#about" id="nav-about-link"
+                        class="nav-link relative text-sm font-medium hover:text-cyan-400 transition-colors">About</a>
+                    <a href="#skills" id="nav-skills-link"
+                        class="nav-link relative text-sm font-medium hover:text-cyan-400 transition-colors">Skills</a>
+                    <a href="#experience" id="nav-exp-link"
+                        class="nav-link relative text-sm font-medium hover:text-cyan-400 transition-colors">Experience</a>
+                    <a href="#projects" id="nav-projects-link"
+                        class="nav-link relative text-sm font-medium hover:text-cyan-400 transition-colors">Projects</a>
+                    <a href="#contact" id="nav-contact-link"
+                        class="px-5 py-2 glass-card rounded-full text-sm font-bold text-cyan-400 hover:bg-cyan-400/10 transition-all border-cyan-400/30">Contact
+                        Me</a>
+                </div>
+
+                <button id="mobileMenuBtn" onclick="toggleMobileMenu()" class="md:hidden text-2xl text-cyan-400 p-2 rounded-xl hover:bg-white/5 transition-colors">
+                    <iconify-icon id="menuIcon" icon="lucide:menu"></iconify-icon>
+                </button>
+            </nav>
+        </header>
+
+        <!-- Mobile Menu Overlay -->
+        <div id="mobileMenuOverlay" class="mobile-menu-overlay md:hidden" onclick="toggleMobileMenu()"></div>
+
+        <!-- Mobile Menu Drawer -->
+        <nav id="mobileMenuDrawer" class="mobile-menu-drawer md:hidden">
+            <div class="flex items-center justify-between mb-6">
+                <span class="text-gradient text-lg font-bold" style="font-family: 'Clash Grotesk', sans-serif;">Menu</span>
+                <button onclick="toggleMobileMenu()" class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-cyan-500/10 transition-all text-slate-400 hover:text-white">
+                    <iconify-icon icon="lucide:x" class="text-lg"></iconify-icon>
+                </button>
+            </div>
+            <div class="h-px bg-gradient-to-r from-cyan-500/30 to-transparent mb-4"></div>
+            <a href="#hero" onclick="toggleMobileMenu()" class="mobile-menu-link">
+                <iconify-icon icon="lucide:home" class="text-lg text-cyan-400"></iconify-icon>
+                Home
+            </a>
+            <a href="#about" onclick="toggleMobileMenu()" class="mobile-menu-link">
+                <iconify-icon icon="lucide:user" class="text-lg text-cyan-400"></iconify-icon>
+                About
+            </a>
+            <a href="#skills" onclick="toggleMobileMenu()" class="mobile-menu-link">
+                <iconify-icon icon="lucide:cpu" class="text-lg text-cyan-400"></iconify-icon>
+                Skills
+            </a>
+            <a href="#experience" onclick="toggleMobileMenu()" class="mobile-menu-link">
+                <iconify-icon icon="lucide:briefcase" class="text-lg text-cyan-400"></iconify-icon>
+                Experience
+            </a>
+            <a href="#projects" onclick="toggleMobileMenu()" class="mobile-menu-link">
+                <iconify-icon icon="lucide:folder" class="text-lg text-cyan-400"></iconify-icon>
+                Projects
+            </a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="mobile-menu-link">
+                <iconify-icon icon="lucide:mail" class="text-lg text-cyan-400"></iconify-icon>
+                Contact Me
+            </a>
+            <div class="mt-auto pt-6">
+                <div class="h-px bg-gradient-to-r from-cyan-500/20 to-transparent mb-4"></div>
+                <div class="flex items-center gap-3">
+                    <a href="https://www.linkedin.com/in/aditya-nikam-7a380723a/" target="_blank" class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-cyan-500/10 transition-all text-slate-400 hover:text-cyan-400">
+                        <iconify-icon icon="lucide:linkedin" class="text-lg"></iconify-icon>
+                    </a>
+                    <a href="https://github.com/Adityanikam755" target="_blank" class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-purple-500/10 transition-all text-slate-400 hover:text-purple-400">
+                        <iconify-icon icon="lucide:github" class="text-lg"></iconify-icon>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1FhPV5htT1bquoHVAeHATtHClUd6dO_vj/view?usp=sharing" target="_blank" class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-indigo-500/10 transition-all text-slate-400 hover:text-indigo-400">
+                        <iconify-icon icon="lucide:file-text" class="text-lg"></iconify-icon>
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <main>
+            <!-- Hero Section -->
+            <section id="hero" class="relative min-h-screen flex items-center pt-20 px-6 overflow-hidden">
+                <!-- Background Portrait Image -->
+                <div class="bg-portrait">
+                    <img src="profile.jpg" alt="Aditya Nikam Portrait" onerror="this.style.display='none'">
+                </div>
+                <div class="max-w-4xl mx-auto w-full text-center z-10 flex flex-col items-center">
+                    <div
+                        class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-bold uppercase tracking-widest mb-6">
+                        <span class="relative flex h-2 w-2">
+                            <span
+                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
+                        </span>
+                        <span>Available for Cloud & AI Solutions</span>
+                    </div>
+                    <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold leading-tight mb-4">
+                        Hi, I'm <span class="text-gradient">Aditya Nikam</span>
+                    </h1>
+                    <div class="mb-6 h-auto md:h-12">
+                        <span class="text-base md:text-xl lg:text-2xl text-slate-400 inline-block text-center leading-relaxed" style="font-weight:500;">Software Engineer |
+                            AWS & DevOps Engineer | Conversational AI Developer</span>
+                    </div>
+                    <p class="text-base md:text-lg text-slate-400 mb-8 md:mb-10 max-w-2xl leading-relaxed px-2">
+                        Building scalable cloud infrastructure, CI/CD pipelines, and intelligent AI-powered
+                        conversational systems. Bridging the gap between robust DevOps and next-gen automation.
+                    </p>
+                    <div class="flex flex-col md:flex-row md:flex-wrap justify-center gap-3 md:gap-4 w-full max-w-sm md:max-w-none mx-auto">
+                        <a href="#projects" id="hero-projects-btn"
+                            class="px-6 md:px-8 py-3.5 md:py-4 bg-gradient-to-r from-cyan-500 to-indigo-600 rounded-xl font-bold hover:shadow-[0_0_30px_rgba(34,211,238,0.5)] transition-all flex items-center justify-center gap-2 group text-sm md:text-base">
+                            View Projects
+                            <iconify-icon icon="lucide:arrow-right"
+                                class="group-hover:translate-x-1 transition-transform"></iconify-icon>
+                        </a>
+                        <a href="https://drive.google.com/file/d/1FhPV5htT1bquoHVAeHATtHClUd6dO_vj/view?usp=sharing"
+                            target="_blank" id="hero-resume-btn"
+                            class="resume-btn group px-6 py-3.5 md:py-4 rounded-xl font-bold text-white transition-all flex items-center justify-center gap-2 text-sm md:text-base">
+                            <span>View Resume</span>
+                            <iconify-icon icon="lucide:file-text"
+                                class="text-xl text-cyan-400 group-hover:text-purple-400 transition-colors duration-300 group-hover:scale-110 group-hover:rotate-6 transition-transform"></iconify-icon>
+                        </a>
+                        <div class="flex gap-3 md:contents">
+                            <a href="https://www.linkedin.com/in/aditya-nikam-7a380723a/" target="_blank"
+                                id="hero-linkedin-btn"
+                                class="linkedin-btn group flex-1 md:flex-none px-6 py-3.5 md:py-4 rounded-xl font-bold text-white transition-all flex items-center justify-center gap-2 text-sm md:text-base">
+                                <span>LinkedIn</span>
+                                <iconify-icon icon="lucide:linkedin"
+                                    class="text-xl text-[#0077b5] group-hover:text-cyan-400 transition-colors duration-300 group-hover:scale-110 group-hover:-rotate-6 transition-transform"></iconify-icon>
+                            </a>
+                            <a href="https://github.com/Adityanikam755" target="_blank" id="hero-github-btn"
+                                class="github-btn group flex-1 md:flex-none px-6 py-3.5 md:py-4 rounded-xl font-bold text-white transition-all flex items-center justify-center gap-2 text-sm md:text-base">
+                                <span>GitHub</span>
+                                <iconify-icon icon="lucide:github"
+                                    class="text-xl text-slate-300 group-hover:text-purple-400 transition-colors duration-300 group-hover:scale-110 group-hover:rotate-6 transition-transform"></iconify-icon>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- About Section -->
+            <section id="about" class="py-24 px-6 relative">
+                <div class="max-w-7xl mx-auto">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                        <div class="order-2 lg:order-1">
+                            <h2 class="text-4xl font-bold mb-8 flex items-center gap-4">
+                                <span class="text-gradient">About Me</span>
+                                <div class="h-px flex-1 bg-gradient-to-r from-cyan-500/50 to-transparent"></div>
+                            </h2>
+                            <p class="text-slate-400 text-lg mb-6 leading-relaxed">
+                                I am a passionate Cloud and DevOps engineer based in Pune, India, with a deep
+                                specialization in building automated, scalable cloud-native architectures. My expertise
+                                spans the complete DevOps lifecycle, from infrastructure provisioning to monitoring and
+                                maintenance.
+                            </p>
+                            <p class="text-slate-400 text-lg mb-8 leading-relaxed">
+                                Beyond the cloud, I thrive at the intersection of AI and human communication. As a
+                                Conversational AI Developer, I design intelligent agents using Dialogflow CX and Google
+                                Cloud, crafting seamless user experiences for enterprise IVR and chatbot systems.
+                            </p>
+                            <div class="grid grid-cols-2 gap-6">
+                                <div class="glass-card p-6 rounded-2xl border-cyan-400/10">
+                                    <h4 class="text-cyan-400 font-bold text-3xl mb-1"><span class="stat-counter" data-target="1">0</span>+</h4>
+                                    <p class="text-slate-500 text-sm uppercase tracking-wider">Years Exp.</p>
+                                </div>
+                                <div class="glass-card p-6 rounded-2xl border-purple-400/10">
+                                    <h4 class="text-purple-400 font-bold text-3xl mb-1"><span class="stat-counter" data-target="10">0</span>+</h4>
+                                    <p class="text-slate-500 text-sm uppercase tracking-wider">Projects Done</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="order-1 lg:order-2 grid grid-cols-2 gap-4">
+                            <div class="space-y-4">
+                                <div
+                                    class="glass-card p-4 rounded-2xl flex flex-col items-center justify-center aspect-square">
+                                    <iconify-icon icon="logos:terraform-icon" class="text-5xl mb-4"></iconify-icon>
+                                    <span
+                                        class="text-xs font-bold uppercase tracking-widest text-slate-300">Infrastructure</span>
+                                </div>
+                                <div
+                                    class="glass-card p-4 rounded-2xl flex flex-col items-center justify-center aspect-square mt-4">
+                                    <iconify-icon icon="logos:kubernetes" class="text-5xl mb-4"></iconify-icon>
+                                    <span
+                                        class="text-xs font-bold uppercase tracking-widest text-slate-300">Orchestration</span>
+                                </div>
+                            </div>
+                            <div class="space-y-4 pt-8">
+                                <div
+                                    class="glass-card p-4 rounded-2xl flex flex-col items-center justify-center aspect-square">
+                                    <iconify-icon icon="logos:jenkins" class="text-5xl mb-4"></iconify-icon>
+                                    <span
+                                        class="text-xs font-bold uppercase tracking-widest text-slate-300">Automation</span>
+                                </div>
+                                <div
+                                    class="glass-card p-4 rounded-2xl flex flex-col items-center justify-center aspect-square mt-4">
+                                    <iconify-icon icon="logos:google-cloud-functions"
+                                        class="text-5xl mb-4"></iconify-icon>
+                                    <span class="text-xs font-bold uppercase tracking-widest text-slate-300">AI
+                                        Backend</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Skills Section -->
+            <section id="skills" class="py-24 px-6 bg-slate-900/30">
+                <div class="max-w-7xl mx-auto">
+                    <div class="text-center mb-16">
+                        <h2 class="text-4xl font-bold mb-4">Technical <span class="text-gradient">Arsenal</span></h2>
+                        <p class="text-slate-400">A comprehensive breakdown of my cloud and AI toolkit.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <!-- Cloud & DevOps -->
+                        <div class="glass-card p-8 rounded-3xl glow-hover transition-all border-cyan-400/10">
+                            <div class="w-14 h-14 rounded-2xl bg-cyan-500/10 flex items-center justify-center mb-6">
+                                <iconify-icon icon="lucide:cloud" class="text-3xl text-cyan-400"></iconify-icon>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-6">Cloud & DevOps</h3>
+                            <div class="flex flex-wrap gap-2">
+                                <span
+                                    class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium skill-chip">AWS</span>
+                                <span
+                                    class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium skill-chip">Terraform</span>
+                                <span
+                                    class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium skill-chip">Jenkins</span>
+                                <span
+                                    class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium skill-chip">Docker</span>
+                                <span
+                                    class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium skill-chip">Kubernetes</span>
+                                <span
+                                    class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium skill-chip">Ansible</span>
+                                <span
+                                    class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium skill-chip">Grafana</span>
+                                <span
+                                    class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium skill-chip">CloudWatch</span>
+                                <span
+                                    class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium skill-chip">Git/GitHub</span>
+                            </div>
+                        </div>
+
+                        <!-- Programming -->
+                        <div class="glass-card p-8 rounded-3xl glow-hover transition-all border-indigo-400/10">
+                            <div class="w-14 h-14 rounded-2xl bg-indigo-500/10 flex items-center justify-center mb-6">
+                                <iconify-icon icon="lucide:code-2" class="text-3xl text-indigo-400"></iconify-icon>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-6">Programming</h3>
+                            <div class="flex flex-wrap gap-2">
+                                <span
+                                    class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium skill-chip">Python</span>
+                                <span
+                                    class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium skill-chip">Shell
+                                    Scripting</span>
+                                <span
+                                    class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium skill-chip">Node.js</span>
+                                <span
+                                    class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium skill-chip">MySQL</span>
+                                <span
+                                    class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium skill-chip">PostgreSQL</span>
+                                <span
+                                    class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium skill-chip">MongoDB</span>
+                                <span
+                                    class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium skill-chip">REST
+                                    APIs</span>
+                            </div>
+                        </div>
+
+                        <!-- AI Technologies -->
+                        <div class="glass-card p-8 rounded-3xl glow-hover transition-all border-purple-400/10">
+                            <div class="w-14 h-14 rounded-2xl bg-purple-500/10 flex items-center justify-center mb-6">
+                                <iconify-icon icon="lucide:cpu" class="text-3xl text-purple-400"></iconify-icon>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-6">AI Technologies</h3>
+                            <div class="flex flex-wrap gap-2">
+                                <span
+                                    class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium skill-chip">Dialogflow
+                                    CX</span>
+                                <span
+                                    class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium skill-chip">Firebase</span>
+                                <span
+                                    class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium skill-chip">NLP
+                                    / NLU</span>
+                                <span
+                                    class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium skill-chip">Voice
+                                    Bot IVR</span>
+                                <span
+                                    class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium skill-chip">WhatsApp
+                                    Bot</span>
+                                <span
+                                    class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-medium skill-chip">LLM
+                                    Concepts</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Experience Section -->
+            <section id="experience" class="py-24 px-6">
+                <div class="max-w-7xl mx-auto">
+                    <h2 class="text-4xl font-bold mb-16 text-center">Professional <span
+                            class="text-gradient">Timeline</span></h2>
+
+                    <div class="relative">
+                        <div class="timeline-line absolute inset-0 hidden md:block"></div>
+
+                        <div class="space-y-12 md:space-y-0">
+                            <!-- Exp 1 -->
+                            <div class="relative grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                                <div class="md:text-right md:pr-12">
+                                    <div
+                                        class="inline-block glass-card px-4 py-1 rounded-full text-cyan-400 text-sm font-bold mb-4">
+                                        May 2025 - Present</div>
+                                    <h3 class="text-2xl font-bold">Conversational AI Developer</h3>
+                                    <p class="text-lg text-slate-300">Sarvajna Media</p>
+                                </div>
+                                <div
+                                    class="absolute left-1/2 -translate-x-1/2 hidden md:flex w-8 h-8 rounded-full bg-slate-900 border-2 border-cyan-400 z-10 items-center justify-center shadow-[0_0_15px_rgba(34,211,238,0.5)]">
+                                </div>
+                                <div class="md:pl-12">
+                                    <div class="glass-card p-6 rounded-3xl">
+                                        <ul class="space-y-3 text-slate-400">
+                                            <li class="flex gap-3">
+                                                <iconify-icon icon="lucide:check-circle"
+                                                    class="text-cyan-400 mt-1"></iconify-icon>
+                                                <span>Designed complex Dialogflow CX agents for enterprise IVR and
+                                                    chatbot systems.</span>
+                                            </li>
+                                            <li class="flex gap-3">
+                                                <iconify-icon icon="lucide:check-circle"
+                                                    class="text-cyan-400 mt-1"></iconify-icon>
+                                                <span>Implemented dynamic webhook integrations using JSON and backend
+                                                    APIs for real-time responses.</span>
+                                            </li>
+                                            <li class="flex gap-3">
+                                                <iconify-icon icon="lucide:check-circle"
+                                                    class="text-cyan-400 mt-1"></iconify-icon>
+                                                <span>Automated WhatsApp and voice bot conversation flows for optimized
+                                                    user engagement.</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Exp 2 -->
+                            <div class="relative grid grid-cols-1 md:grid-cols-2 gap-8 items-center md:pt-16">
+                                <div class="order-1 md:order-2 md:pl-12">
+                                    <div
+                                        class="inline-block glass-card px-4 py-1 rounded-full text-purple-400 text-sm font-bold mb-4">
+                                        Sep 2024 - March 2025</div>
+                                    <h3 class="text-2xl font-bold">Cloud & DevOps Intern</h3>
+                                    <p class="text-lg text-slate-300">Cravita Technologies India Pvt Ltd</p>
+                                </div>
+                                <div
+                                    class="absolute left-1/2 -translate-x-1/2 hidden md:flex w-8 h-8 rounded-full bg-slate-900 border-2 border-purple-400 z-10 items-center justify-center shadow-[0_0_15px_rgba(168,85,247,0.5)]">
+                                </div>
+                                <div class="order-2 md:order-1 md:pr-12">
+                                    <div class="glass-card p-6 rounded-3xl">
+                                        <ul class="space-y-3 text-slate-400">
+                                            <li class="flex gap-3">
+                                                <iconify-icon icon="lucide:check-circle"
+                                                    class="text-purple-400 mt-1"></iconify-icon>
+                                                <span>Managed AWS infrastructure including EC2, RDS, IAM, S3, and Custom
+                                                    VPCs.</span>
+                                            </li>
+                                            <li class="flex gap-3">
+                                                <iconify-icon icon="lucide:check-circle"
+                                                    class="text-purple-400 mt-1"></iconify-icon>
+                                                <span>Developed Jenkins CI/CD pipelines for automated application
+                                                    deployments and Docker orchestration.</span>
+                                            </li>
+                                            <li class="flex gap-3">
+                                                <iconify-icon icon="lucide:check-circle"
+                                                    class="text-purple-400 mt-1"></iconify-icon>
+                                                <span>Configured monitoring dashboards using Grafana and AWS CloudWatch
+                                                    for infra health checks.</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Projects Section -->
+            <section id="projects" class="py-24 px-6 bg-slate-900/20">
+                <div class="max-w-7xl mx-auto">
+                    <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+                        <div>
+                            <h2 class="text-4xl font-bold mb-4">Featured <span class="text-gradient">Engineering</span>
+                                Projects</h2>
+                            <p class="text-slate-400">A collection of projects showcasing cloud architecture and AI
+                                integration.</p>
+                        </div>
+                        <a href="https://github.com/Adityanikam755" target="_blank" rel="noopener noreferrer"
+                            id="all-projects-link"
+                            class="github-btn group px-5 py-2.5 rounded-xl font-bold text-white transition-all flex items-center gap-2">
+                            <span>Explore Repository</span>
+                            <iconify-icon icon="lucide:github"
+                                class="text-lg text-slate-300 group-hover:text-purple-400 transition-colors duration-300 group-hover:scale-110 group-hover:rotate-6 transition-transform"></iconify-icon>
+                        </a>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- Project 1 -->
+                        <div class="group relative overflow-hidden rounded-3xl project-card">
+                            <div class="h-80 bg-slate-800 flex items-center justify-center">
+                                <iconify-icon icon="mdi:airplane-takeoff"
+                                    class="text-8xl text-cyan-400/20 group-hover:scale-110 transition-transform duration-500"></iconify-icon>
+                            </div>
+                            <div onclick="openModal('project1Modal')"
+                                class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent p-8 flex flex-col justify-end transition-all duration-500 cursor-pointer">
+                                <div class="flex gap-2 mb-4">
+                                    <span
+                                        class="px-2 py-1 bg-cyan-500/20 rounded text-[10px] font-bold text-cyan-400 uppercase">Dialogflow
+                                        CX</span>
+                                    <span
+                                        class="px-2 py-1 bg-cyan-500/20 rounded text-[10px] font-bold text-cyan-400 uppercase">Python</span>
+                                </div>
+                                <h3 class="text-2xl font-bold mb-2">AI-Powered Flight Booking Assistant</h3>
+                                <p class="text-slate-400 text-sm mb-6">Multi-turn conversational agent with slot filling
+                                    and backend integration via Google Cloud Functions for flight search and
+                                    reservation.</p>
+                                <div class="flex gap-4">
+                                    <button onclick="openModal('project1Modal')" id="project-1-info"
+                                        class="detail-btn px-5 py-2.5 bg-gradient-to-r from-cyan-500/20 to-indigo-500/20 border border-cyan-400/30 hover:border-cyan-400/60 rounded-xl text-sm font-bold text-cyan-300 hover:text-white transition-all flex items-center gap-2 z-10 relative">
+                                        <iconify-icon icon="lucide:info" class="text-base"></iconify-icon>
+                                        View Details
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project 2 -->
+                        <div class="group relative overflow-hidden rounded-3xl project-card">
+                            <div class="h-80 bg-slate-800 flex items-center justify-center">
+                                <iconify-icon icon="mdi:hospital-building"
+                                    class="text-8xl text-purple-400/20 group-hover:scale-110 transition-transform duration-500"></iconify-icon>
+                            </div>
+                            <div onclick="openModal('project2Modal')"
+                                class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent p-8 flex flex-col justify-end transition-all duration-500 cursor-pointer">
+                                <div class="flex gap-2 mb-4">
+                                    <span
+                                        class="px-2 py-1 bg-purple-500/20 rounded text-[10px] font-bold text-purple-400 uppercase">Firebase</span>
+                                    <span
+                                        class="px-2 py-1 bg-purple-500/20 rounded text-[10px] font-bold text-purple-400 uppercase">IVR
+                                        Bot</span>
+                                </div>
+                                <h3 class="text-2xl font-bold mb-2">Healthcare IVR & Chatbot</h3>
+                                <p class="text-slate-400 text-sm mb-6">Automated patient intake system with emergency
+                                    escalation logic and real-time database synchronization for hospitals.</p>
+                                <div class="flex gap-4">
+                                    <button onclick="openModal('project2Modal')" id="project-2-info"
+                                        class="detail-btn px-5 py-2.5 bg-gradient-to-r from-purple-500/20 to-indigo-500/20 border border-purple-400/30 hover:border-purple-400/60 rounded-xl text-sm font-bold text-purple-300 hover:text-white transition-all flex items-center gap-2 z-10 relative">
+                                        <iconify-icon icon="lucide:info" class="text-base"></iconify-icon>
+                                        View Details
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project 3 -->
+                        <div class="group relative overflow-hidden rounded-3xl project-card">
+                            <div class="h-80 bg-slate-800 flex items-center justify-center">
+                                <iconify-icon icon="mdi:aws"
+                                    class="text-8xl text-indigo-400/20 group-hover:scale-110 transition-transform duration-500"></iconify-icon>
+                            </div>
+                            <div onclick="openModal('project3Modal')"
+                                class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent p-8 flex flex-col justify-end transition-all duration-500 cursor-pointer">
+                                <div class="flex gap-2 mb-4">
+                                    <span
+                                        class="px-2 py-1 bg-indigo-500/20 rounded text-[10px] font-bold text-indigo-400 uppercase">Terraform</span>
+                                    <span
+                                        class="px-2 py-1 bg-indigo-500/20 rounded text-[10px] font-bold text-indigo-400 uppercase">VPC
+                                        Architecture</span>
+                                </div>
+                                <h3 class="text-2xl font-bold mb-2">Three-tier AWS Architecture</h3>
+                                <p class="text-slate-400 text-sm mb-6">Highly available VPC with Public/Private subnets,
+                                    ALB, EC2 Auto-scaling, and RDS backend for high-traffic apps.</p>
+                                <div class="flex gap-4">
+                                    <button onclick="openModal('project3Modal')" id="project-3-info"
+                                        class="detail-btn px-5 py-2.5 bg-gradient-to-r from-indigo-500/20 to-cyan-500/20 border border-indigo-400/30 hover:border-indigo-400/60 rounded-xl text-sm font-bold text-indigo-300 hover:text-white transition-all flex items-center gap-2 z-10 relative">
+                                        <iconify-icon icon="lucide:info" class="text-base"></iconify-icon>
+                                        View Details
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project 4 -->
+                        <div class="group relative overflow-hidden rounded-3xl project-card">
+                            <div class="h-80 bg-slate-800 flex items-center justify-center">
+                                <iconify-icon icon="mdi:face-recognition"
+                                    class="text-8xl text-rose-400/20 group-hover:scale-110 transition-transform duration-500"></iconify-icon>
+                            </div>
+                            <div onclick="openModal('project4Modal')"
+                                class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent p-8 flex flex-col justify-end transition-all duration-500 cursor-pointer">
+                                <div class="flex gap-2 mb-4">
+                                    <span
+                                        class="px-2 py-1 bg-rose-500/20 rounded text-[10px] font-bold text-rose-400 uppercase">Python</span>
+                                    <span
+                                        class="px-2 py-1 bg-rose-500/20 rounded text-[10px] font-bold text-rose-400 uppercase">AI/ML</span>
+                                </div>
+                                <h3 class="text-2xl font-bold mb-2">AI Based Missing Person Search</h3>
+                                <p class="text-slate-400 text-sm mb-6">Face recognition system built with Flutter and
+                                    SQL to assist law enforcement in real-time identification of missing individuals.
+                                </p>
+                                <div class="flex gap-4">
+                                    <button onclick="openModal('project4Modal')" id="project-4-info"
+                                        class="detail-btn px-5 py-2.5 bg-gradient-to-r from-rose-500/20 to-purple-500/20 border border-rose-400/30 hover:border-rose-400/60 rounded-xl text-sm font-bold text-rose-300 hover:text-white transition-all flex items-center gap-2 z-10 relative">
+                                        <iconify-icon icon="lucide:info" class="text-base"></iconify-icon>
+                                        View Details
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                <div>
+                    <h2 class="text-4xl font-bold mb-8">Let's <span class="text-gradient">Collaborate</span>
+                    </h2>
+                    <p class="text-slate-400 text-lg mb-10 leading-relaxed">
+                        Looking for a Cloud/DevOps expert to optimize your infrastructure or an AI developer to
+                        build intelligent agents? I'm always open to new opportunities and projects.
+                    </p>
+
+                    <div class="space-y-6">
+                        <!-- Email -->
+                        <div class="flex items-center gap-4 group">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-cyan-500/10 flex items-center justify-center border border-cyan-500/20 group-hover:bg-cyan-500/20 group-hover:scale-105 transition-all duration-300">
+                                <iconify-icon icon="lucide:mail" class="text-xl text-cyan-400"></iconify-icon>
+                            </div>
+                            <div>
+                                <p class="text-xs text-slate-500 uppercase tracking-widest font-bold">Email</p>
+                                <a href="mailto:adityanikam534@gmail.com" id="contact-email-link"
+                                    class="text-lg font-medium hover:text-cyan-400 transition-colors flex items-center gap-1.5 group-hover:translate-x-1 transition-transform duration-300">
+                                    adityanikam534@gmail.com
+                                    <iconify-icon icon="lucide:arrow-right"
+                                        class="text-sm opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all duration-300"></iconify-icon>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- Phone -->
+                        <div class="flex items-center gap-4 group">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center border border-purple-500/20 group-hover:bg-purple-500/20 group-hover:scale-105 transition-all duration-300">
+                                <iconify-icon icon="lucide:phone" class="text-xl text-purple-400"></iconify-icon>
+                            </div>
+                            <div>
+                                <p class="text-xs text-slate-500 uppercase tracking-widest font-bold">Phone</p>
+                                <a href="tel:+917798362594"
+                                    class="text-lg font-medium hover:text-purple-400 transition-colors flex items-center gap-1.5 group-hover:translate-x-1 transition-transform duration-300">
+                                    +91 7798362594
+                                    <iconify-icon icon="lucide:phone-call"
+                                        class="text-sm opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all duration-300"></iconify-icon>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- Location -->
+                        <div class="flex items-center gap-4 group">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-indigo-500/10 flex items-center justify-center border border-indigo-500/20 group-hover:bg-indigo-500/20 group-hover:scale-105 transition-all duration-300">
+                                <iconify-icon icon="lucide:map-pin" class="text-xl text-indigo-400"></iconify-icon>
+                            </div>
+                            <div>
+                                <p class="text-xs text-slate-500 uppercase tracking-widest font-bold">Location</p>
+                                <span
+                                    class="text-lg font-medium text-slate-300 group-hover:text-white transition-colors duration-300 block group-hover:translate-x-1 transition-transform duration-300">
+                                    Pune, Maharashtra, India
+                                </span>
+                            </div>
+                        </div>
+                        <!-- LinkedIn -->
+                        <div class="flex items-center gap-4 group">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-cyan-500/10 flex items-center justify-center border border-cyan-500/20 group-hover:bg-cyan-500/20 group-hover:scale-105 transition-all duration-300">
+                                <iconify-icon icon="lucide:linkedin" class="text-xl text-cyan-400"></iconify-icon>
+                            </div>
+                            <div>
+                                <p class="text-xs text-slate-500 uppercase tracking-widest font-bold">LinkedIn</p>
+                                <a href="https://www.linkedin.com/in/aditya-nikam-7a380723a/" target="_blank"
+                                    rel="noopener noreferrer" id="contact-linkedin-link"
+                                    class="text-lg font-medium hover:text-cyan-400 transition-colors flex items-center gap-1.5 group-hover:translate-x-1 transition-transform duration-300">
+                                    Aditya Nikam
+                                    <iconify-icon icon="lucide:external-link"
+                                        class="text-sm opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all duration-300"></iconify-icon>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- GitHub -->
+                        <div class="flex items-center gap-4 group">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center border border-purple-500/20 group-hover:bg-purple-500/20 group-hover:scale-105 transition-all duration-300">
+                                <iconify-icon icon="lucide:github" class="text-xl text-purple-400"></iconify-icon>
+                            </div>
+                            <div>
+                                <p class="text-xs text-slate-500 uppercase tracking-widest font-bold">GitHub</p>
+                                <a href="https://github.com/Adityanikam755" target="_blank" rel="noopener noreferrer"
+                                    id="contact-github-link"
+                                    class="text-lg font-medium hover:text-purple-400 transition-colors flex items-center gap-1.5 group-hover:translate-x-1 transition-transform duration-300">
+                                    Adityanikam755
+                                    <iconify-icon icon="lucide:external-link"
+                                        class="text-sm opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all duration-300"></iconify-icon>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card p-8 rounded-3xl border-white/5 relative">
+                    <div class="absolute -top-10 -right-10 w-40 h-40 bg-cyan-500/10 rounded-full blur-3xl">
+                    </div>
+                    <form class="space-y-6 relative z-10">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="space-y-2">
+                                <label class="text-sm font-medium text-slate-400 ml-1">Full Name</label>
+                                <input type="text" placeholder="John Doe"
+                                    class="w-full bg-slate-900/50 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-cyan-400 transition-colors text-slate-200">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-sm font-medium text-slate-400 ml-1">Email Address</label>
+                                <input type="email" placeholder="john@example.com"
+                                    class="w-full bg-slate-900/50 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-cyan-400 transition-colors text-slate-200">
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium text-slate-400 ml-1">Subject</label>
+                            <input type="text" placeholder="Project Collaboration"
+                                class="w-full bg-slate-900/50 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-cyan-400 transition-colors text-slate-200">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium text-slate-400 ml-1">Message</label>
+                            <textarea rows="4" placeholder="Let's build something amazing together..."
+                                class="w-full bg-slate-900/50 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-cyan-400 transition-colors text-slate-200 resize-none"></textarea>
+                        </div>
+                        <button type="submit"
+                            class="w-full py-4 bg-gradient-to-r from-cyan-500 to-indigo-600 rounded-xl font-bold hover:shadow-[0_0_20px_rgba(34,211,238,0.4)] transition-all flex items-center justify-center gap-2 group">
+                            Send Message
+                            <iconify-icon icon="lucide:send"
+                                class="group-hover:translate-x-1 transition-transform"></iconify-icon>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col items-center justify-center gap-6 text-center">
+            <div class="flex flex-wrap items-center justify-center gap-3">
+                <a href="#hero" id="footer-home-link"
+                    class="dock-btn px-4 py-2 rounded-full flex items-center gap-2 text-sm font-bold transition-all duration-300 border border-white/10 hover:border-cyan-400/30">
+                    <iconify-icon icon="lucide:home" class="text-lg text-cyan-400"></iconify-icon>
+                    <span>Home</span>
+                </a>
+                <a href="#about" id="footer-about-link"
+                    class="dock-btn px-4 py-2 rounded-full flex items-center gap-2 text-sm font-bold transition-all duration-300 border border-white/10 hover:border-cyan-400/30">
+                    <iconify-icon icon="lucide:user" class="text-lg text-cyan-400"></iconify-icon>
+                    <span>About</span>
+                </a>
+                <a href="#skills" id="footer-skills-link"
+                    class="dock-btn px-4 py-2 rounded-full flex items-center gap-2 text-sm font-bold transition-all duration-300 border border-white/10 hover:border-cyan-400/30">
+                    <iconify-icon icon="lucide:cpu" class="text-lg text-cyan-400"></iconify-icon>
+                    <span>Skills</span>
+                </a>
+                <a href="#experience" id="footer-exp-link"
+                    class="dock-btn px-4 py-2 rounded-full flex items-center gap-2 text-sm font-bold transition-all duration-300 border border-white/10 hover:border-cyan-400/30">
+                    <iconify-icon icon="lucide:briefcase" class="text-lg text-cyan-400"></iconify-icon>
+                    <span>Exp</span>
+                </a>
+            </div>
+            <p class="text-xs text-slate-500 mt-2 tracking-widest uppercase font-semibold">
+                &copy; 2026 Aditya Nikam. Crafted with Passion &amp; Code.
+            </p>
+        </div>
+    </footer>
+    </main>
+    </div>
+
+    <!-- Custom Cursor Glow -->
+    <div id="cursor-glow" class="pointer-events-none fixed w-[500px] h-[500px] rounded-full blur-3xl z-0 transition-opacity duration-300 opacity-0 hidden md:block" style="background: radial-gradient(circle, rgba(34,211,238,0.1) 0%, rgba(168,85,247,0.05) 50%, transparent 70%); transform: translate(-50%, -50%); left: 50%; top: 50%;"></div>
+
+    <!-- Back to Top Button -->
+    <button id="backToTopBtn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 flex items-center justify-center backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300 hover:bg-cyan-500/20 hover:scale-110 hover:shadow-[0_0_15px_rgba(34,211,238,0.3)] translate-y-4">
+        <iconify-icon icon="lucide:arrow-up" class="text-xl"></iconify-icon>
+    </button>
+
+    <!-- Project 4 Detail Modal -->
+    <div id="project4Modal" class="modal-overlay" onclick="if(event.target===this) closeModal('project4Modal')">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="relative p-8 pb-0">
+                <div class="flex items-start justify-between mb-6">
+                    <div class="flex items-center gap-4">
+                        <div
+                            class="w-14 h-14 rounded-2xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center">
+                            <iconify-icon icon="mdi:face-recognition" class="text-3xl text-rose-400"></iconify-icon>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-white" style="font-family: 'Clash Grotesk', sans-serif;">
+                                AI-Based Missing Person Search</h3>
+                            <p class="text-rose-400 text-sm font-medium mt-1">Intelligent Facial Recognition System</p>
+                        </div>
+                    </div>
+                    <button onclick="closeModal('project4Modal')"
+                        class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-rose-500/20 hover:border-rose-400/30 transition-all text-slate-400 hover:text-white">
+                        <iconify-icon icon="lucide:x" class="text-lg"></iconify-icon>
+                    </button>
+                </div>
+                <div class="h-px bg-gradient-to-r from-rose-500/40 via-purple-500/20 to-transparent"></div>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="p-8 space-y-8">
+                <!-- Overview -->
+                <div>
+                    <p class="text-slate-300 leading-relaxed text-[15px]">
+                        Developed an intelligent web-based application that helps identify and track missing persons
+                        using Artificial Intelligence and facial recognition technology. The system compares uploaded
+                        images with stored records to find potential matches quickly and improve search efficiency for
+                        authorities and organizations.
+                    </p>
+                </div>
+
+                <!-- Key Features -->
+                <div>
+                    <h4 class="text-lg font-bold text-white mb-4 flex items-center gap-2"
+                        style="font-family: 'Clash Grotesk', sans-serif;">
+                        <iconify-icon icon="lucide:zap" class="text-rose-400"></iconify-icon>
+                        Key Features
+                    </h4>
+                    <div class="space-y-1">
+                        <div class="modal-feature-item">
+                            <iconify-icon icon="lucide:check-circle"
+                                class="text-emerald-400 mt-0.5 text-base flex-shrink-0"></iconify-icon>
+                            <span class="text-slate-300 text-sm">AI-powered facial recognition and image matching</span>
+                        </div>
+                        <div class="modal-feature-item">
+                            <iconify-icon icon="lucide:check-circle"
+                                class="text-emerald-400 mt-0.5 text-base flex-shrink-0"></iconify-icon>
+                            <span class="text-slate-300 text-sm">Upload and manage missing person records</span>
+                        </div>
+                        <div class="modal-feature-item">
+                            <iconify-icon icon="lucide:check-circle"
+                                class="text-emerald-400 mt-0.5 text-base flex-shrink-0"></iconify-icon>
+                            <span class="text-slate-300 text-sm">Real-time image comparison with database records</span>
+                        </div>
+                        <div class="modal-feature-item">
+                            <iconify-icon icon="lucide:check-circle"
+                                class="text-emerald-400 mt-0.5 text-base flex-shrink-0"></iconify-icon>
+                            <span class="text-slate-300 text-sm">Advanced search and filtering functionality</span>
+                        </div>
+                        <div class="modal-feature-item">
+                            <iconify-icon icon="lucide:check-circle"
+                                class="text-emerald-400 mt-0.5 text-base flex-shrink-0"></iconify-icon>
+                            <span class="text-slate-300 text-sm">Secure user authentication and data handling</span>
+                        </div>
+                        <div class="modal-feature-item">
+                            <iconify-icon icon="lucide:check-circle"
+                                class="text-emerald-400 mt-0.5 text-base flex-shrink-0"></iconify-icon>
+                            <span class="text-slate-300 text-sm">Responsive dashboard for admins and users</span>
+                        </div>
+                        <div class="modal-feature-item">
+                            <iconify-icon icon="lucide:check-circle"
+                                class="text-emerald-400 mt-0.5 text-base flex-shrink-0"></iconify-icon>
+                            <span class="text-slate-300 text-sm">Fast and accurate person identification system</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Technologies Used -->
+                <div>
+                    <h4 class="text-lg font-bold text-white mb-4 flex items-center gap-2"
+                        style="font-family: 'Clash Grotesk', sans-serif;">
+                        <iconify-icon icon="lucide:layers" class="text-rose-400"></iconify-icon>
+                        Technologies Used
+                    </h4>
+                    <div class="space-y-3">
+                        <div>
+                            <p class="text-xs text-slate-500 uppercase tracking-widest font-bold mb-2">Frontend</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="modal-tech-chip">React.js</span>
+                                <span class="modal-tech-chip">HTML</span>
+                                <span class="modal-tech-chip">CSS</span>
+                                <span class="modal-tech-chip">JavaScript</span>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500 uppercase tracking-widest font-bold mb-2">Backend</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="modal-tech-chip">Node.js</span>
+                                <span class="modal-tech-chip">Express.js</span>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500 uppercase tracking-widest font-bold mb-2">Database</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="modal-tech-chip">MongoDB</span>
+                                <span class="modal-tech-chip">Firebase</span>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500 uppercase tracking-widest font-bold mb-2">AI / ML</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="modal-tech-chip">Python</span>
+                                <span class="modal-tech-chip">OpenCV</span>
+                                <span class="modal-tech-chip">Face Recognition Model</span>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500 uppercase tracking-widest font-bold mb-2">Tools & Platforms
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="modal-tech-chip">Git</span>
+                                <span class="modal-tech-chip">GitHub</span>
+                                <span class="modal-tech-chip">VS Code</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Outcome -->
+                <div class="bg-gradient-to-r from-rose-500/5 to-purple-500/5 border border-rose-500/10 rounded-2xl p-6">
+                    <h4 class="text-lg font-bold text-white mb-3 flex items-center gap-2"
+                        style="font-family: 'Clash Grotesk', sans-serif;">
+                        <iconify-icon icon="lucide:trophy" class="text-amber-400"></iconify-icon>
+                        Project Outcome
+                    </h4>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        Successfully developed an AI-driven solution that reduces manual effort in identifying missing
+                        persons and improves search accuracy through automated facial recognition and centralized data
+                        management.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project 3 Detail Modal -->
+    <div id="project3Modal" class="modal-overlay" onclick="if(event.target===this) closeModal('project3Modal')">
+        <div class="modal-content"
+            style="box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(99, 102, 241, 0.1);">
+            <!-- Modal Header -->
+            <div class="relative p-8 pb-0">
+                <div class="flex items-start justify-between mb-6">
+                    <div class="flex items-center gap-4">
+                        <div
+                            class="w-14 h-14 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center">
+                            <iconify-icon icon="mdi:aws" class="text-3xl text-indigo-400"></iconify-icon>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-white" style="font-family: 'Clash Grotesk', sans-serif;">
+                                Three-Tier AWS Architecture</h3>
+                            <p class="text-indigo-400 text-sm font-medium mt-1">Scalable Cloud Infrastructure</p>
+                        </div>
+                    </div>
+                    <button onclick="closeModal('project3Modal')"
+                        class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-indigo-500/20 hover:border-indigo-400/30 transition-all text-slate-400 hover:text-white">
+                        <iconify-icon icon="lucide:x" class="text-lg"></iconify-icon>
+                    </button>
+                </div>
+                <div class="h-px bg-gradient-to-r from-indigo-500/40 via-cyan-500/20 to-transparent"></div>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="p-8 space-y-8">
+                <!-- Overview -->
+                <div>
+                    <p class="text-slate-300 leading-relaxed text-[15px]">
+                        Designed and implemented a secure and scalable three-tier architecture on AWS to host a web
+                        application efficiently. The architecture separates the system into presentation, application,
+                        and database layers to improve security, scalability, and performance.
+                    </p>
+                </div>
+
+                <!-- Key Features -->
+                <div>
+                    <h4 class="text-lg font-bold text-white mb-4 flex items-center gap-2"
+                        style="font-family: 'Clash Grotesk', sans-serif;">
+                        <iconify-icon icon="lucide:zap" class="text-indigo-400"></iconify-icon>
+                        Key Features
+                    </h4>
+                    <div class="space-y-1">
+                        <div class="modal-feature-item">
+                            <iconify-icon icon="lucide:check-circle"
+                                class="text-emerald-400 mt-0.5 text-base flex-shrink-0"></iconify-icon>
+                            <span class="text-slate-300 text-sm">Implemented Web, Application, and Database tiers</span>
+                        </div>
+                        <div class="modal-feature-item">
+                            <iconify-icon icon="lucide:check-circle"
+                                class="text-emerald-400 mt-0.5 text-base flex-shrink-0"></iconify-icon>
+                            <span class="text-slate-300 text-sm">Configured AWS VPC with public and private
+                                subnets</span>
+                        </div>
+                        <div class="modal-feature-item">
+                            <iconify-icon icon="lucide:check-circle"
+                                class="text-emerald-400 mt-0.5 text-base flex-shrink-0"></iconify-icon>
+                            <span class="text-slate-300 text-sm">Deployed EC2 instances for application hosting</span>
+                        </div>
+                        <div class="modal-feature-item">
+                            <iconify-icon icon="lucide:check-circle"
+                                class="text-emerald-400 mt-0.5 text-base flex-shrink-0"></iconify-icon>
+                            <span class="text-slate-300 text-sm">Integrated Load Balancer for traffic
+                                distribution</span>
+                        </div>
+                        <div class="modal-feature-item">
+                            <iconify-icon icon="lucide:check-circle"
+                                class="text-emerald-400 mt-0.5 text-base flex-shrink-0"></iconify-icon>
+                            <span class="text-slate-300 text-sm">Configured Auto Scaling for high availability</span>
+                        </div>
+                        <div class="modal-feature-item">
+                            <iconify-icon icon="lucide:check-circle"
+                                class="text-emerald-400 mt-0.5 text-base flex-shrink-0"></iconify-icon>
+                            <span class="text-slate-300 text-sm">Used Amazon RDS for secure database management</span>
+                        </div>
+                        <div class="modal-feature-item">
+                            <iconify-icon icon="lucide:check-circle"
+                                class="text-emerald-400 mt-0.5 text-base flex-shrink-0"></iconify-icon>
+                            <span class="text-slate-300 text-sm">Implemented IAM roles and Security Groups for access
+                                control</span>
+                        </div>
+                        <div class="modal-feature-item">
+                            <iconify-icon icon="lucide:check-circle"
+                                class="text-emerald-400 mt-0.5 text-base flex-shrink-0"></iconify-icon>
+                            <span class="text-slate-300 text-sm">Monitoring and logging using Amazon CloudWatch</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Technologies & AWS Services -->
+                <div>
+                    <h4 class="text-lg font-bold text-white mb-4 flex items-center gap-2"
+                        style="font-family: 'Clash Grotesk', sans-serif;">
+                        <iconify-icon icon="lucide:layers" class="text-indigo-400"></iconify-icon>
+                        Technologies & AWS Services
+                    </h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="modal-tech-chip"
+                            style="background: rgba(99,102,241,0.08); border-color: rgba(99,102,241,0.2); color: #818cf8;">AWS
+                            EC2</span>
+                        <span class="modal-tech-chip"
+                            style="background: rgba(99,102,241,0.08); border-color: rgba(99,102,241,0.2); color: #818cf8;">Amazon
+                            RDS</span>
+                        <span class="modal-tech-chip"
+                            style="background: rgba(99,102,241,0.08); border-color: rgba(99,102,241,0.2); color: #818cf8;">VPC
+                            & Subnets</span>
+                        <span class="modal-tech-chip"
+                            style="background: rgba(99,102,241,0.08); border-color: rgba(99,102,241,0.2); color: #818cf8;">Elastic
+                            Load Balancer</span>
+                        <span class="modal-tech-chip"
+                            style="background: rgba(99,102,241,0.08); border-color: rgba(99,102,241,0.2); color: #818cf8;">Auto
+                            Scaling</span>
+                        <span class="modal-tech-chip"
+                            style="background: rgba(99,102,241,0.08); border-color: rgba(99,102,241,0.2); color: #818cf8;">IAM</span>
+                        <span class="modal-tech-chip"
+                            style="background: rgba(99,102,241,0.08); border-color: rgba(99,102,241,0.2); color: #818cf8;">CloudWatch</span>
+                        <span class="modal-tech-chip"
+                            style="background: rgba(99,102,241,0.08); border-color: rgba(99,102,241,0.2); color: #818cf8;">Linux
+                            (Ubuntu/Amazon Linux)</span>
+                        <span class="modal-tech-chip"
+                            style="background: rgba(99,102,241,0.08); border-color: rgba(99,102,241,0.2); color: #818cf8;">Git
+                            & GitHub</span>
+                    </div>
+                </div>
+
+                <!-- Project Outcome -->
+                <div
+                    class="bg-gradient-to-r from-indigo-500/5 to-cyan-500/5 border border-indigo-500/10 rounded-2xl p-6">
+                    <h4 class="text-lg font-bold text-white mb-3 flex items-center gap-2"
+                        style="font-family: 'Clash Grotesk', sans-serif;">
+                        <iconify-icon icon="lucide:trophy" class="text-amber-400"></iconify-icon>
+                        Project Outcome
+                    </h4>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        Successfully deployed a highly available and fault-tolerant cloud infrastructure that improved
+                        application scalability, security, and resource management.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Project 1 Detail Modal -->
+    <div id="project1Modal" class="modal-overlay" onclick="if(event.target===this) closeModal('project1Modal')">
+        <div class="modal-content"
+            style="box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(34, 211, 238, 0.1);">
+            <!-- Modal Header -->
+            <div class="relative p-8 pb-0">
+                <div class="flex items-start justify-between mb-6">
+                    <div class="flex items-center gap-4">
+                        <div
+                            class="w-14 h-14 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center">
+                            <iconify-icon icon="mdi:airplane-takeoff" class="text-3xl text-cyan-400"></iconify-icon>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-white" style="font-family: 'Clash Grotesk', sans-serif;">
+                                AI-Powered Flight Booking Assistant</h3>
+                            <p class="text-cyan-400 text-sm font-medium mt-1">Conversational AI Agent</p>
+                        </div>
+                    </div>
+                    <button onclick="closeModal('project1Modal')"
+                        class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-cyan-500/20 hover:border-cyan-400/30 transition-all text-slate-400 hover:text-white">
+                        <iconify-icon icon="lucide:x" class="text-lg"></iconify-icon>
+                    </button>
+                </div>
+                <div class="h-px bg-gradient-to-r from-cyan-500/40 via-indigo-500/20 to-transparent"></div>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="p-8 space-y-8">
+                <!-- Overview -->
+                <div>
+                    <p class="text-slate-300 leading-relaxed text-[15px]">
+                        Developed an intelligent conversational AI-based flight booking assistant using Dialogflow CX to
+                        automate customer interactions and simplify the flight reservation process. The assistant
+                        understands natural language queries, provides flight information, and guides users through
+                        booking workflows in real time.
+                    </p>
+                </div>
+
+                <!-- Key Features -->
+                <div>
+                    <h4 class="text-lg font-bold text-white mb-4 flex items-center gap-2"
+                        style="font-family: 'Clash Grotesk', sans-serif;">
+                        <iconify-icon icon="lucide:zap" class="text-cyan-400"></iconify-icon>
+                        Key Features
+                    </h4>
+                    <div class="space-y-1">
+                        <div class="modal-feature-item">
+                            <iconify-icon icon="lucide:check-circle"
+                                class="text-emerald-400 mt-0.5 text-base flex-shrink-0"></iconify-icon>
+                            <span class="text-slate-300 text-sm">Conversational AI chatbot for flight booking
+                                assistance</span>
+                        </div>
+                        <div class="modal-feature-item">
+                            <iconify-icon icon="lucide:check-circle"
+                                class="text-emerald-400 mt-0.5 text-base flex-shrink-0"></iconify-icon>
+                            <span class="text-slate-300 text-sm">Natural Language Processing (NLP) for user query
+                                understanding</span>
+                        </div>
+                        <div class="modal-feature-item">
+                            <iconify-icon icon="lucide:check-circle"
+                                class="text-emerald-400 mt-0.5 text-base flex-shrink-0"></iconify-icon>
+                            <span class="text-slate-300 text-sm">Flight search and booking workflow automation</span>
+                        </div>
+                        <div class="modal-feature-item">
+                            <iconify-icon icon="lucide:check-circle"
+                                class="text-emerald-400 mt-0.5 text-base flex-shrink-0"></iconify-icon>
+                            <span class="text-slate-300 text-sm">Real-time user interaction with intelligent
+                                responses</span>
+                        </div>
+                        <div class="modal-feature-item">
+                            <iconify-icon icon="lucide:check-circle"
+                                class="text-emerald-400 mt-0.5 text-base flex-shrink-0"></iconify-icon>
+                            <span class="text-slate-300 text-sm">Multi-step conversation handling using Dialogflow
+                                CX</span>
+                        </div>
+                        <div class="modal-feature-item">
+                            <iconify-icon icon="lucide:check-circle"
+                                class="text-emerald-400 mt-0.5 text-base flex-shrink-0"></iconify-icon>
+                            <span class="text-slate-300 text-sm">Secure user authentication and session
+                                management</span>
+                        </div>
+                        <div class="modal-feature-item">
+                            <iconify-icon icon="lucide:check-circle"
+                                class="text-emerald-400 mt-0.5 text-base flex-shrink-0"></iconify-icon>
+                            <span class="text-slate-300 text-sm">User-friendly interface with responsive design</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Technologies Used -->
+                <div>
+                    <h4 class="text-lg font-bold text-white mb-4 flex items-center gap-2"
+                        style="font-family: 'Clash Grotesk', sans-serif;">
+                        <iconify-icon icon="lucide:layers" class="text-cyan-400"></iconify-icon>
+                        Technologies Used
+                    </h4>
+                    <div class="space-y-3">
+                        <div>
+                            <p class="text-xs text-slate-500 uppercase tracking-widest font-bold mb-2">Conversational AI
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="modal-tech-chip"
+                                    style="background: rgba(34, 211, 238, 0.08); border-color: rgba(34, 211, 238, 0.2); color: #22d3ee;">Dialogflow
+                                    CX</span>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500 uppercase tracking-widest font-bold mb-2">Programming
+                                Languages</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="modal-tech-chip"
+                                    style="background: rgba(34, 211, 238, 0.08); border-color: rgba(34, 211, 238, 0.2); color: #22d3ee;">Python</span>
+                                <span class="modal-tech-chip"
+                                    style="background: rgba(34, 211, 238, 0.08); border-color: rgba(34, 211, 238, 0.2); color: #22d3ee;">JavaScript</span>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500 uppercase tracking-widest font-bold mb-2">Frontend</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="modal-tech-chip"
+                                    style="background: rgba(34, 211, 238, 0.08); border-color: rgba(34, 211, 238, 0.2); color: #22d3ee;">React.js</span>
+                                <span class="modal-tech-chip"
+                                    style="background: rgba(34, 211, 238, 0.08); border-color: rgba(34, 211, 238, 0.2); color: #22d3ee;">HTML</span>
+                                <span class="modal-tech-chip"
+                                    style="background: rgba(34, 211, 238, 0.08); border-color: rgba(34, 211, 238, 0.2); color: #22d3ee;">CSS</span>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500 uppercase tracking-widest font-bold mb-2">Backend</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="modal-tech-chip"
+                                    style="background: rgba(34, 211, 238, 0.08); border-color: rgba(34, 211, 238, 0.2); color: #22d3ee;">Node.js</span>
+                                <span class="modal-tech-chip"
+                                    style="background: rgba(34, 211, 238, 0.08); border-color: rgba(34, 211, 238, 0.2); color: #22d3ee;">Express.js</span>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500 uppercase tracking-widest font-bold mb-2">APIs</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="modal-tech-chip"
+                                    style="background: rgba(34, 211, 238, 0.08); border-color: rgba(34, 211, 238, 0.2); color: #22d3ee;">Flight
+                                    Booking & Travel APIs</span>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500 uppercase tracking-widest font-bold mb-2">Tools & Platforms
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="modal-tech-chip"
+                                    style="background: rgba(34, 211, 238, 0.08); border-color: rgba(34, 211, 238, 0.2); color: #22d3ee;">Google
+                                    Cloud Platform (GCP)</span>
+                                <span class="modal-tech-chip"
+                                    style="background: rgba(34, 211, 238, 0.08); border-color: rgba(34, 211, 238, 0.2); color: #22d3ee;">Git</span>
+                                <span class="modal-tech-chip"
+                                    style="background: rgba(34, 211, 238, 0.08); border-color: rgba(34, 211, 238, 0.2); color: #22d3ee;">GitHub</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Outcome -->
+                <div class="bg-gradient-to-r from-cyan-500/5 to-indigo-500/5 border border-cyan-500/10 rounded-2xl p-6">
+                    <h4 class="text-lg font-bold text-white mb-3 flex items-center gap-2"
+                        style="font-family: 'Clash Grotesk', sans-serif;">
+                        <iconify-icon icon="lucide:trophy" class="text-amber-400"></iconify-icon>
+                        Project Outcome
+                    </h4>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        Successfully built an AI-driven virtual assistant that improves customer experience by providing
+                        fast, automated, and accurate flight booking support through conversational interactions.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project 2 Detail Modal -->
+    <div id="project2Modal" class="modal-overlay" onclick="if(event.target===this) closeModal('project2Modal')">
+        <div class="modal-content"
+            style="box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(168, 85, 247, 0.1);">
+            <!-- Modal Header -->
+            <div class="relative p-8 pb-0">
+                <div class="flex items-start justify-between mb-6">
+                    <div class="flex items-center gap-4">
+                        <div
+                            class="w-14 h-14 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center">
+                            <iconify-icon icon="mdi:hospital-building" class="text-3xl text-purple-400"></iconify-icon>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-white" style="font-family: 'Clash Grotesk', sans-serif;">
+                                Healthcare IVR & Chatbot System</h3>
+                            <p class="text-purple-400 text-sm font-medium mt-1">Automated Patient Intake & Support</p>
+                        </div>
+                    </div>
+                    <button onclick="closeModal('project2Modal')"
+                        class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-purple-500/20 hover:border-purple-400/30 transition-all text-slate-400 hover:text-white">
+                        <iconify-icon icon="lucide:x" class="text-lg"></iconify-icon>
+                    </button>
+                </div>
+                <div class="h-px bg-gradient-to-r from-purple-500/40 via-indigo-500/20 to-transparent"></div>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="p-8 space-y-8">
+                <!-- Overview -->
+                <div>
+                    <p class="text-slate-300 leading-relaxed text-[15px]">
+                        Developed an AI-powered healthcare chatbot and IVR system using Dialogflow CX to automate
+                        patient communication, appointment handling, and emergency response workflows for hospitals. The
+                        system streamlines patient intake processes through conversational AI and real-time database
+                        synchronization.
+                    </p>
+                </div>
+
+                <!-- Key Features -->
+                <div>
+                    <h4 class="text-lg font-bold text-white mb-4 flex items-center gap-2"
+                        style="font-family: 'Clash Grotesk', sans-serif;">
+                        <iconify-icon icon="lucide:zap" class="text-purple-400"></iconify-icon>
+                        Key Features
+                    </h4>
+                    <div class="space-y-1">
+                        <div class="modal-feature-item">
+                            <iconify-icon icon="lucide:check-circle"
+                                class="text-emerald-400 mt-0.5 text-base flex-shrink-0"></iconify-icon>
+                            <span class="text-slate-300 text-sm">AI-powered healthcare chatbot and IVR automation</span>
+                        </div>
+                        <div class="modal-feature-item">
+                            <iconify-icon icon="lucide:check-circle"
+                                class="text-emerald-400 mt-0.5 text-base flex-shrink-0"></iconify-icon>
+                            <span class="text-slate-300 text-sm">Automated patient intake and registration system</span>
+                        </div>
+                        <div class="modal-feature-item">
+                            <iconify-icon icon="lucide:check-circle"
+                                class="text-emerald-400 mt-0.5 text-base flex-shrink-0"></iconify-icon>
+                            <span class="text-slate-300 text-sm">Emergency escalation logic for critical
+                                situations</span>
+                        </div>
+                        <div class="modal-feature-item">
+                            <iconify-icon icon="lucide:check-circle"
+                                class="text-emerald-400 mt-0.5 text-base flex-shrink-0"></iconify-icon>
+                            <span class="text-slate-300 text-sm">Real-time database synchronization with hospital
+                                records</span>
+                        </div>
+                        <div class="modal-feature-item">
+                            <iconify-icon icon="lucide:check-circle"
+                                class="text-emerald-400 mt-0.5 text-base flex-shrink-0"></iconify-icon>
+                            <span class="text-slate-300 text-sm">Natural Language Processing (NLP) for patient
+                                interaction</span>
+                        </div>
+                        <div class="modal-feature-item">
+                            <iconify-icon icon="lucide:check-circle"
+                                class="text-emerald-400 mt-0.5 text-base flex-shrink-0"></iconify-icon>
+                            <span class="text-slate-300 text-sm">Appointment scheduling and inquiry management</span>
+                        </div>
+                        <div class="modal-feature-item">
+                            <iconify-icon icon="lucide:check-circle"
+                                class="text-emerald-400 mt-0.5 text-base flex-shrink-0"></iconify-icon>
+                            <span class="text-slate-300 text-sm">Multi-step conversational workflows using Dialogflow
+                                CX</span>
+                        </div>
+                        <div class="modal-feature-item">
+                            <iconify-icon icon="lucide:check-circle"
+                                class="text-emerald-400 mt-0.5 text-base flex-shrink-0"></iconify-icon>
+                            <span class="text-slate-300 text-sm">Secure and responsive healthcare support system</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Technologies Used -->
+                <div>
+                    <h4 class="text-lg font-bold text-white mb-4 flex items-center gap-2"
+                        style="font-family: 'Clash Grotesk', sans-serif;">
+                        <iconify-icon icon="lucide:layers" class="text-purple-400"></iconify-icon>
+                        Technologies Used
+                    </h4>
+                    <div class="space-y-3">
+                        <div>
+                            <p class="text-xs text-slate-500 uppercase tracking-widest font-bold mb-2">Conversational AI
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="modal-tech-chip"
+                                    style="background: rgba(168, 85, 247, 0.08); border-color: rgba(168, 85, 247, 0.2); color: #c084fc;">Dialogflow
+                                    CX</span>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500 uppercase tracking-widest font-bold mb-2">Programming
+                                Languages</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="modal-tech-chip"
+                                    style="background: rgba(168, 85, 247, 0.08); border-color: rgba(168, 85, 247, 0.2); color: #c084fc;">Python</span>
+                                <span class="modal-tech-chip"
+                                    style="background: rgba(168, 85, 247, 0.08); border-color: rgba(168, 85, 247, 0.2); color: #c084fc;">JavaScript</span>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500 uppercase tracking-widest font-bold mb-2">Frontend</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="modal-tech-chip"
+                                    style="background: rgba(168, 85, 247, 0.08); border-color: rgba(168, 85, 247, 0.2); color: #c084fc;">React.js</span>
+                                <span class="modal-tech-chip"
+                                    style="background: rgba(168, 85, 247, 0.08); border-color: rgba(168, 85, 247, 0.2); color: #c084fc;">HTML</span>
+                                <span class="modal-tech-chip"
+                                    style="background: rgba(168, 85, 247, 0.08); border-color: rgba(168, 85, 247, 0.2); color: #c084fc;">CSS</span>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500 uppercase tracking-widest font-bold mb-2">Backend</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="modal-tech-chip"
+                                    style="background: rgba(168, 85, 247, 0.08); border-color: rgba(168, 85, 247, 0.2); color: #c084fc;">Node.js</span>
+                                <span class="modal-tech-chip"
+                                    style="background: rgba(168, 85, 247, 0.08); border-color: rgba(168, 85, 247, 0.2); color: #c084fc;">Express.js</span>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500 uppercase tracking-widest font-bold mb-2">Database</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="modal-tech-chip"
+                                    style="background: rgba(168, 85, 247, 0.08); border-color: rgba(168, 85, 247, 0.2); color: #c084fc;">MongoDB</span>
+                                <span class="modal-tech-chip"
+                                    style="background: rgba(168, 85, 247, 0.08); border-color: rgba(168, 85, 247, 0.2); color: #c084fc;">Firebase</span>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500 uppercase tracking-widest font-bold mb-2">Cloud Platform &
+                                Tools</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="modal-tech-chip"
+                                    style="background: rgba(168, 85, 247, 0.08); border-color: rgba(168, 85, 247, 0.2); color: #c084fc;">Google
+                                    Cloud Platform (GCP)</span>
+                                <span class="modal-tech-chip"
+                                    style="background: rgba(168, 85, 247, 0.08); border-color: rgba(168, 85, 247, 0.2); color: #c084fc;">REST
+                                    APIs</span>
+                                <span class="modal-tech-chip"
+                                    style="background: rgba(168, 85, 247, 0.08); border-color: rgba(168, 85, 247, 0.2); color: #c084fc;">Git</span>
+                                <span class="modal-tech-chip"
+                                    style="background: rgba(168, 85, 247, 0.08); border-color: rgba(168, 85, 247, 0.2); color: #c084fc;">GitHub</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Outcome -->
+                <div
+                    class="bg-gradient-to-r from-purple-500/5 to-indigo-500/5 border border-purple-500/10 rounded-2xl p-6">
+                    <h4 class="text-lg font-bold text-white mb-3 flex items-center gap-2"
+                        style="font-family: 'Clash Grotesk', sans-serif;">
+                        <iconify-icon icon="lucide:trophy" class="text-amber-400"></iconify-icon>
+                        Project Outcome
+                    </h4>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        Successfully developed an intelligent healthcare communication system that improves patient
+                        support, automates hospital workflows, and enables faster emergency response through AI-driven
+                        conversations and IVR automation.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const overlay = document.getElementById('mobileMenuOverlay');
+            const drawer = document.getElementById('mobileMenuDrawer');
+            const menuIcon = document.getElementById('menuIcon');
+            const isOpen = drawer.classList.contains('active');
+
+            if (isOpen) {
+                drawer.classList.remove('active');
+                overlay.classList.remove('active');
+                menuIcon.setAttribute('icon', 'lucide:menu');
+                document.body.style.overflow = '';
+            } else {
+                drawer.classList.add('active');
+                overlay.classList.add('active');
+                menuIcon.setAttribute('icon', 'lucide:x');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        // Close modals on Escape key
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                closeModal('project1Modal');
+                closeModal('project2Modal');
+                closeModal('project3Modal');
+                closeModal('project4Modal');
+                // Also close mobile menu
+                const drawer = document.getElementById('mobileMenuDrawer');
+                if (drawer && drawer.classList.contains('active')) {
+                    toggleMobileMenu();
+                }
+            }
+        });
+
+        // Animated Stats Counter
+        window.addEventListener('DOMContentLoaded', () => {
+            const statCounters = document.querySelectorAll('.stat-counter');
+            const statsObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const target = parseInt(entry.target.getAttribute('data-target'));
+                        const duration = 2000;
+                        const stepTime = Math.abs(Math.floor(duration / target));
+                        let current = 0;
+                        const timer = setInterval(() => {
+                            current += 1;
+                            entry.target.textContent = current;
+                            if (current >= target) {
+                                clearInterval(timer);
+                                entry.target.textContent = target;
+                            }
+                        }, stepTime);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            statCounters.forEach(counter => {
+                statsObserver.observe(counter);
+            });
+        });
+
+        // Back to Top Button
+        window.addEventListener('scroll', () => {
+            const backToTopBtn = document.getElementById('backToTopBtn');
+            if (window.scrollY > 500) {
+                backToTopBtn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
+                backToTopBtn.classList.add('opacity-100', 'translate-y-0');
+            } else {
+                backToTopBtn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+                backToTopBtn.classList.remove('opacity-100', 'translate-y-0');
+            }
+        });
+
+        // Custom Cursor Glow
+        window.addEventListener('DOMContentLoaded', () => {
+            const cursorGlow = document.getElementById('cursor-glow');
+            if (cursorGlow) {
+                document.addEventListener('mousemove', (e) => {
+                    cursorGlow.style.left = e.clientX + 'px';
+                    cursorGlow.style.top = e.clientY + 'px';
+                    cursorGlow.classList.remove('opacity-0');
+                });
+                document.addEventListener('mouseleave', () => {
+                    cursorGlow.classList.add('opacity-0');
+                });
+            }
+        });
+
+        // Preloader countdown and fade out
+        window.addEventListener('DOMContentLoaded', () => {
+            const counterEl = document.getElementById('loader-counter');
+            const progressEl = document.getElementById('loader-progress');
+            const preloader = document.getElementById('preloader');
+            
+            let count = 0;
+            const target = 100;
+            const duration = 1200; // 1.2 seconds total loading duration
+            const stepTime = Math.floor(duration / target);
+            
+            const timer = setInterval(() => {
+                count++;
+                counterEl.innerText = count;
+                progressEl.style.width = count + '%';
+                
+                if (count >= target) {
+                    clearInterval(timer);
+                    setTimeout(() => {
+                        preloader.classList.add('loader-fade-out');
+                        document.body.style.overflow = '';
+                        
+                        setTimeout(() => {
+                            preloader.remove();
+                        }, 800);
+                    }, 100);
+                }
+            }, stepTime);
+        });
+    </script>
+</body>
+
+</html>
